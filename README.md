@@ -1,4 +1,4 @@
-# Ufutx library
+﻿# Ufutx library
 
 ## Features
 
@@ -25,7 +25,7 @@
 
 
 ## Usage
-
+   
 ### Start
 
 ``` bash
