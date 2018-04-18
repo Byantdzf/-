@@ -2,8 +2,8 @@
                         小程序配置文件
 ======================================================== */
 // 域名
-var host = 'https://library.ufutx.com/api'
-// var host = 'http://library.hankin.com/api'
+// var host = 'https://library.ufutx.com/api'
+var host = 'http://party/api'
 export const service = {
     // 登录接口
     login: `${host}/login/wechat`,
@@ -13,6 +13,8 @@ export const service = {
     send_register: `${host}/sms/register`,
     //用户
     user: `${host}/user`,
+    //解密
+    infor: `${host}/wechat/infor`,
     //借阅书籍
     reserve: `${host}/libraries/books`,
     // 列表接口 GET
@@ -39,7 +41,6 @@ export const service = {
     // 假装有收藏接口 POST
     collect: `${host}/bookmall/list`,
     // 主域
-    host
 }
 
 export default {

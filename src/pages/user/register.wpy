@@ -72,12 +72,12 @@
 
 //    computed = {
 //      listIndex() {
-//        const arr = this.getArray((this.list || []).filter((item, index) => {
-//          item.TEMPINDEX = index
+//        const arr = this.getArray((this.list || []).filter((item, index.wpy) => {
+//          item.TEMPINDEX = index.wpy
 //          return this.getString(this.value) === this.getString(item.id)
 //        }))
-//        const index = arr[0] && arr[0].TEMPINDEX
-//        return this.getNumber(index)
+//        const index.wpy = arr[0] && arr[0].TEMPINDEX
+//        return this.getNumber(index.wpy)
 //      },
 //      realPrice() {
 //        const item = this.list && this.list[this.listIndex]
@@ -108,7 +108,7 @@
     initPageData() {
       var token = this.getString(wx.getStorageSync('token'))
       if (token) {
-        wx.switchTab({url: '/pages/index'})
+//        wx.switchTab({url: '/pages/index'})
       }
       this.$doLogin()
     }
@@ -116,6 +116,19 @@
       console.log(e.detail.errMsg)
       console.log(e.detail.iv)
       console.log(e.detail.encryptedData)
+      let data = {
+        code: wx.getStorageSync('code'),
+        iv: e.detail.iv,
+        encryptedData: e.detail.encryptedData
+      }
+      console.log(service.infor)
+      this.$post({url: service.infor, data}, {
+        success: ({code, data}) => {
+          debugger
+        },
+        fail: ({code, data}) => {},
+        complete: () => { this.loading = false }
+      })
 //      debugger
     }
 //    getInfo() {
@@ -178,7 +191,7 @@
                     if (jump) {
                       wx.navigateTo({url: jump})
                     } else {
-                      wx.switchTab({url: '/pages/index'})
+//                      wx.switchTab({url: '/pages/index.wpy'})
                     }
                   }
                 })

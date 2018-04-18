@@ -9,7 +9,7 @@
       </view>
       <view class="clearfloat"></view>
       <view style="width: 100%" class="font_28">{{list.start_time}}</view>
-      <view style="width: 100%" class="font_28 bold">{{list.title}}</view>
+      <view style="width: 100%" class="font_32 bold">{{list.title}}</view>
       <view style="width: 100%" class="font_28">
         地点：{{list.address}}
         <image src="../../images/tabbars/address.png"  mode="aspectFit" class="imgicon" style="margin-bottom: 8rpx"></image>
@@ -17,8 +17,45 @@
       <view style="width: 100%" class="font_28">备注：{{list.notes}}</view>
     </view>
     <view class="member">
-      <image src="{{list.temp_id.image}}"  mode="aspectFit" class="party_image"></image>
+     <image src="{{list.temp_id.image}}"  mode="aspectFit" class="party_image flo_l"></image>
+      <button open-type="share" class="btn flo_l">
+        <image src="../../images/tabbars/addmember.png"  mode="aspectFit" class="party_image"  ></image>
+      </button>
       <view class="flo_r font_32" style="margin-top: 16rpx">1 人</view>
+      <view class="clearfloat"></view>
+    </view>
+    <view class="member">
+      <view  class="flo_l setting text-center">
+        <view class="setting_box">
+          <image src="../../images/tabbars/statistics.png"  mode="aspectFit" class="party_setting"></image>
+        </view>
+        <view class="font_26 text-center">统计</view>
+      </view>
+      <view  class="flo_l setting text-center">
+        <view class="setting_box">
+          <image src="../../images/tabbars/money.png"  mode="aspectFit" class="party_setting"></image>
+        </view>
+        <view class="font_26 text-center">提现</view>
+      </view>
+      <view  class="flo_l setting text-center">
+        <view class="setting_box">
+          <image src="../../images/tabbars/edit.png"  mode="aspectFit" class="party_setting"></image>
+        </view>
+        <view class="font_26 text-center">修改</view>
+      </view>
+      <view  class="flo_l setting text-center">
+        <view class="setting_box">
+          <image src="../../images/tabbars/save.png"  mode="aspectFit" class="party_setting"></image>
+        </view>
+        <view class="font_26">保存模板</view>
+      </view>
+      <view  class="flo_l setting text-center">
+        <view class="setting_box">
+          <image src="../../images/tabbars/setting.png"  mode="aspectFit" class="party_setting"></image>
+        </view>
+        <view class="font_26 text-center">设置</view>
+      </view>
+      <view class="clearfloat"></view>
     </view>
     <!--<view class="weui-cell">-->
       <!--<view style="width: 100%">{{list.start_time}}</view>-->
@@ -26,6 +63,7 @@
   </view>
   <view style="width: 100%;" class="fixed_bot">
     <button @tap="goto('/pages/party/edit_party')" class="weui-btn btn-blue flo_l">报名参加 </button>
+    <!--<button @tap="goto('/pages/party/edit_party')" class="weui-btn btn-blue flo_l">取消报名 </button>-->
     <button open-type="share" class="weui-btn btn-blue_r flo_l">分享给好友</button>
   </view>
 </template>
@@ -67,7 +105,7 @@
       this.loading = true
       // 请求列表
       this.$get({
-        url: 'https://www.easy-mock.com/mock/5ad47afac318c4111e897bda/party/party'
+        url: 'https://www.easy-mock.com/mock/5ad47afac318c4111e897bda/party/party',
       }, {
         success: ({code, data}) => {
           this.noMoreList = false
@@ -112,7 +150,7 @@
   .party{
     position: relative;
     padding: 12rpx 50rpx;
-    margin:0 12rpx;
+    margin:0 22rpx;
     background:white;
     /*border-bottom: 1rpx solid #d5d5d5;*/
   }
@@ -140,6 +178,7 @@
     color: white;
     padding: 6rpx 22rpx;
     background: orange;
+    margin-left: -62rpx;
   }
   .user_image{
     width: 100rpx;
@@ -157,12 +196,34 @@
     box-shadow: 1rpx 1rpx 18rpx #d3d3d3;
     border-radius: 50%;
     margin-top: 12rpx;
+    margin-right: 22rpx;
+  }
+  .party_setting{
+    width: 60rpx;
+    height: 60rpx;
+    box-shadow: 1rpx 1rpx 18rpx #d3d3d3;
+    /*border-radius: 50%;*/
+  }
+  .setting{
+    width: 20%;
   }
   .member{
-    margin: 0 12rpx;
+    margin: 0 22rpx;
     padding: 6rpx 32rpx;
     background: white;
     border-top: 1rpx solid #d3d3d3;
-    border-bottom: 1rpx solid #d3d3d3;
+    /*border-bottom: 1rpx solid #d3d3d3;*/
+  }
+  .setting_box{
+    border-radius: 50%;
+    width: 60rpx;
+    height: 60rpx;
+    padding: 12rpx;
+    background: red;
+    margin-left: 22rpx;
+    margin-top: 6rpx;
+  }
+  .setting_box:active{
+    transform: scale(1.1);
   }
 </style>

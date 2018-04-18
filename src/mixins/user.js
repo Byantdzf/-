@@ -11,6 +11,7 @@ export default class userMixin extends wepy.mixin {
   $doLogin() {
     wepy.login({
       success: (res) => {
+        wx.setStorageSync('code', res.code)
         console.log('wepy.login.success:', res)
         this.$post({ url: service.login, data: {code: res.code} }, {
           success: ({code, data}) => {

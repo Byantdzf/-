@@ -49,7 +49,7 @@ export default class extends wepy.app {
   onShareAppMessage(title = '友福聚会') {
     return {
       title: title,
-//      path: '/pages/index',
+//      path: '/pages/index.wpy',
       // imageUrl: '',
       success: function(res) {
         // 转发成功

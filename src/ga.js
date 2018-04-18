@@ -356,13 +356,13 @@ HitBuilder.prototype.setCampaignParamsFromUrl = function (url) {
     return this.setAll(hit);
 }
 
-// @param int index >= 1
+// @param int index.wpy >= 1
 // @param String dimension
 HitBuilder.prototype.setCustomDimension = function (index, dimension) {
     this.custom_dimensions.push([index, dimension]);
     return this;
 }
-// @param int index >= 1
+// @param int index.wpy >= 1
 // @param float metric
 HitBuilder.prototype.setCustomMetric = function (index, metric) {
     this.custom_metrics.push([index, metric]);
@@ -395,7 +395,7 @@ HitBuilder.prototype.build = function () {
         del_keys.push('ni');
     }
 
-    // 清理旧的cd<index> ,cm<index>
+    // 清理旧的cd<index.wpy> ,cm<index.wpy>
     for (var k in this.hit) {
         if (k.match(/^(cd|cm)\d+$/)) {
             del_keys.push(k);
@@ -566,13 +566,13 @@ Product.prototype.setCouponCode = function (couponCode) {
     this.hit["cc"] = couponCode;
     return this;
 }
-// @param int index
+// @param int index.wpy
 // @param String value
 Product.prototype.setCustomDimension = function (index, value) {
     this.hit["cd" + index] = value;
     return this;
 }
-// @param int index
+// @param int index.wpy
 // @param double value
 Product.prototype.setCustomMetric = function (index, value) {
     this.hit["cm" + index] = value;
