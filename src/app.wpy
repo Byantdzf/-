@@ -8,8 +8,11 @@ var HitBuilders = ga.HitBuilders
 export default class extends wepy.app {
   config = {
     pages: [
-      'pages/index',
-      'pages/page'
+//      'pages/index',
+      'pages/user/register',
+      'pages/party/edit_party',
+      'pages/party/edit_station',
+      'pages/party/start_party'
     ],
     window: {
       navigationBarTitleText: '小程序',
@@ -43,7 +46,7 @@ export default class extends wepy.app {
   onShow(options) {
   }
 
-  onShareAppMessage(title = '友福图书馆') {
+  onShareAppMessage(title = '友福聚会') {
     return {
       title: title,
 //      path: '/pages/index',
@@ -75,8 +78,8 @@ export default class extends wepy.app {
     if (!this.globalData.tracker) {
       // 初始化GoogleAnalytics Tracker
       this.globalData.tracker = GoogleAnalytics.getInstance(this)
-      .setAppName('友福图书馆')
-      .setAppVersion('v0.4')
+      .setAppName('友福聚会')
+      .setAppVersion('v0.1')
       .newTracker('UA-109097480-1')
     }
     var t = this.globalData.tracker
