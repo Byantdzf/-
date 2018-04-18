@@ -21,7 +21,7 @@
     </view>
     <view class="weui-cell">
       <view class="weui-cell__bd h4">
-        <input @input="typing('name')" class="weui-input" value="{{name}}" placeholder="聚会、读书会、运动、出游..."/>
+        <input @input="typing('title')" class="weui-input" value="{{title}}" placeholder="聚会、读书会、运动、出游..."/>
       </view>
     </view>
     <view class="weui-cell reset-cell-block">
@@ -29,7 +29,7 @@
     </view>
     <view class="weui-cell">
       <view class="weui-cell__bd h4">
-        <input @input="typing('name')" class="weui-input" type="number" value="{{name}}" placeholder="费用..."/>
+        <input @input="typing('fee')" class="weui-input" type="number" value="{{fee}}" placeholder="费用..."/>
       </view>
     </view>
     <view class="weui-cell reset-cell-block">
@@ -37,16 +37,30 @@
     </view>
     <view class="weui-cell">
       <view class="weui-cell__bd h4">
-        <input @input="typing('name')" class="weui-input" value="{{name}}" placeholder="时间选择..."/>
+        <view class="section flo_l" style="margin-right: 10%">
+          <picker mode="date" value="{{date}}"  @change="typing('date')">
+            <view class="picker">
+              <input class="weui-input" value="{{date}}" placeholder="日期选择..."/>
+            </view>
+          </picker>
+        </view>
+        <view class="section">
+          <picker mode="time" value="{{time}}"  @change="typing('time')">
+            <view class="picker">
+              <input class="weui-input" value="{{time}}" placeholder="时间选择..."/>
+            </view>
+          </picker>
+        </view>
+        <!--<input @input="typing('name')" class="weui-input" value="{{name}}" placeholder="时间选择..."/>-->
       </view>
-      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      <!--<view class="weui-cell__ft weui-cell__ft_in-access"></view>-->
     </view>
     <view class="weui-cell reset-cell-block">
       <view class="weui-media-box__title h3 color-666">定位地点：</view>
     </view>
     <view class="weui-cell">
       <view class="weui-cell__bd h4">
-        <input @input="typing('name')" class="weui-input" value="{{name}}" placeholder="点击选取地点..."/>
+        <input @input="typing('address')" class="weui-input" value="{{name}}" placeholder="点击选取地点..."/>
       </view>
       <view class="weui-cell__ft weui-cell__ft_in-access"></view>
     </view>
@@ -55,12 +69,12 @@
     </view>
     <view class="weui-cell">
       <view class="weui-cell__bd h4">
-        <input @input="typing('name')" class="weui-input" value="{{name}}" placeholder="聚会详细内容..."/>
+        <input @input="typing('notes')" class="weui-input" value="{{notes}}" placeholder="聚会详细内容..."/>
       </view>
     </view>
   </view>
   <view style="width: 50%;margin:22rpx auto">
-    <button @tap="goto('/pages/party/edit_station')" class="weui-btn btn-blue">下一步</button>
+    <button @tap="next('/pages/party/edit_station')" class="weui-btn btn-blue">下一步</button>
   </view>
 </template>
 
@@ -85,7 +99,13 @@
       loading: false,
       list: [],
       page: 1,
-      image: 'https://bpic.588ku.com/element_pic/00/86/45/1756eb6344677b3.jpg!/fw/254/quality/90/unsharp/true/compress/true'
+      date: '',
+      time: '',
+      title: '',
+      address: '',
+      address_detail: '',
+      notes: '',
+      fee: '',
     }
 
     onReady() {
@@ -186,12 +206,25 @@
       goto(url) {
         wx.navigateTo({url: url})
       },
-      go_fa_step(id) {
-//        for (i=1;i<6;i++){
-//          document.getElementById("fa_"+i).className='help_step_item';
-//        }
-//        document.getElementById("fa_"+id).className+=" help_step_set"
+      typing (type, e) {
+        if (this.isDefined(this[type])) {
+          this[type] = e.detail.value
+        }
+      },
+      next (url) {
+        let data = {
+          start_time: this.date + this.time,
+          notes: this.notes,
+          title: this.title,
+          address: this.address,
+          address_detail: '详细地址',
+          fee: this.fee,
+          location_longitude: 'jing',
+          location_latitude: 'wei',
+        }
+        console.log(data)
       }
+
     }
 
     components = {

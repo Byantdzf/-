@@ -111,6 +111,7 @@
 //        wx.switchTab({url: '/pages/index'})
       }
       this.$doLogin()
+      this.$setCode()
     }
     getPhoneNumber(e) {
       console.log(e.detail.errMsg)
@@ -157,11 +158,11 @@
       do_login() {
         // 防抖
         if (this.loading) return
-        if (!this.isPhone(this.mobile)) {
-          return this.$alert('温馨提示', '请输入正确的手机号码')
-        }
         if (!this.getString(this.name)) {
           return this.$alert('温馨提示', '请输入姓名')
+        }
+        if (!this.isPhone(this.mobile)) {
+          return this.$alert('温馨提示', '请输入正确的手机号码')
         }
         wepy.getUserInfo({
           success: (res) => {
@@ -169,10 +170,10 @@
             wx.setStorageSync('user', res.userInfo)
             const data = {
               mobile: this.getString(this.mobile),
-              code: this.getString(this.code),
+              code: wx.getStorageSync('code'),
               name: this.getString(this.name),
-              wechat_code: this.getString(this.$getCode()),
-              info: res.userInfo,
+//              wechat_code: this.getString(this.$getCode()),
+//              info: res.userInfo,
               encryptedData: res.encryptedData,
               iv: res.iv
             }
@@ -183,7 +184,7 @@
               success: ({code, data}) => {
                 wx.setStorageSync('token', data.token)
                 wx.showModal({
-                  title: '注册成功',
+                  title: '更新成功',
                   content: '返回之前页面！',
                   showCancel: false,
                   success: (res) => {
